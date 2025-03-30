@@ -4,6 +4,7 @@ import CryptoJS from "crypto-js";
 import CharacterList from "./components/CharacterList";
 import CharacterDetail from "./components/CharacterDetail";
 import HeroImage from "./components/HeroImage";
+import "./App.css";
 
 function App() {
   const [characters, setCharacters] = useState([]);
