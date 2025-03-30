@@ -1,35 +1,58 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import CryptoJS from "crypto-js";
 
 function App() {
-  const [count, setCount] = useState(0);
+	const [character, setCharacter] = useState([]);
+
+	useEffect(() => {
+    const fetchCharacters = async () => {
+      const publicKey = import.meta.env.VITE_PUBLIC_API_KEY;
+      const privateKey = import.meta.env.VITE_PRIVATE_API_KEY;
+
+      const ts = new Date().getTime();
+      const hash = CryptoJS.MD5(ts + privateKey + publicKey).toString();
+
+      try {
+        const response = await axios.get(
+          `https://gateway.marvel.com/v1/public/characters`,
+          {
+            params: {
+              ts,
+              apikey: publicKey,
+              hash,
+              limit: 10,
+            },
+          }
+				);
+				setCharacter(response.data.data.results)
+        
+      } catch (error) {
+				console.error("Error fetching characters:", error);
+
+			}
+    };
+
+		fetchCharacters();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+		<>
+			<h1>Marvel</h1>
+			<ul>
+				{character.map((character) => (
+					<li key={character.id}>
+						<h2>{character.name}</h2>
+						<img
+              src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+              alt={character.name}
+            />
+					</li>
+				))}
+			</ul>
+		</>
+	)
+	
 }
 
 export default App;
