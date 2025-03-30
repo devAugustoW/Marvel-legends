@@ -9,6 +9,7 @@
   padding: 20px;
   font-family: 'Roboto', Arial, sans-serif;
 	background-color: #262949;
+	min-height: 100vh;
 }
 
 .hero-container {
@@ -60,7 +61,7 @@
 
 .character-details {
   max-width: 70%;
-	height: 50%;
+	height: 70vh;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -69,7 +70,7 @@
 
 .character-image {
   max-width: 100%;
-  height: auto;
+  height: 50vh;
   border-radius: 4px;
   margin-bottom: 15px;
 }
