@@ -3,7 +3,8 @@
 ## Descrição
 **Marvel Legends** é um projeto frontend desenvolvido com Vite e React que consome a API da Marvel para renderizar personagens da Marcel Comics. O objetivo do projeto é fornecer uma interface interativa onde os usuários podem visualizar os principais personagens da Marvel e obter informações detalhadas sobre cada um deles.
 
-!Marvel Legends Demo
+https://github.com/user-attachments/assets/bb8794b7-2bfc-4139-9eab-6a83660c4979
+
 
 ## Funcionalidades
 
