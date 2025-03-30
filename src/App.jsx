@@ -142,7 +142,7 @@ function App() {
 
   return (
     <div className="marvel-app">
-			<HeroImage />
+      <HeroImage />
       <h1>Top 100 Personagens da Marvel</h1>
       
       {loading ? (
@@ -151,7 +151,8 @@ function App() {
         <div className="characters-container">
           <CharacterList 
             characters={characters} 
-            onCharacterClick={handleCharacterClick} 
+            onCharacterClick={handleCharacterClick}
+            selectedCharacter={selectedCharacter} 
           />
           <CharacterDetail character={selectedCharacter} />
         </div>

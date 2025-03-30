@@ -60,7 +60,7 @@
 }
 
 .character-details {
-  max-width: 70%;
+  max-width: 80%;
 	height: 70vh;
   padding: 20px;
   background-color: #f9f9f9;
@@ -90,6 +90,12 @@ p {
   line-height: 1.6;
 }
 
+/* Por padrão, oculta a versão mobile */
+.mobile-character-detail {
+  display: none;
+}
+
+/* Ativa apenas em telas pequenas */
 @media (max-width: 768px) {
   .characters-container {
     flex-direction: column;
@@ -97,5 +103,31 @@ p {
   
   .characters-list {
     max-width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* Oculta o detalhe lateral em telas pequenas */
+  .characters-container > .character-details {
+    display: none;
+  }
+  
+  /* Mostra o detalhe mobile abaixo do nome */
+  .mobile-character-detail {
+    display: block;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .mobile-character-detail h2 {
+    margin-bottom: 10px;
+  }
+  
+  .mobile-character-detail .character-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 40vh;
+    object-fit: contain;
   }
 }
