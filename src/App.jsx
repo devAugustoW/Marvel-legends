@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CryptoJS from "crypto-js";
+import CharacterList from "./components/CharacterList";
+import CharacterDetail from "./components/CharacterDetail";
+import HeroImage from "./components/HeroImage";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -103,7 +106,7 @@ function App() {
       const hash = CryptoJS.MD5(ts + privateKey + publicKey).toString();
       
       try {
-        // Buscar cada personagem individualmente por ID
+        
         const charactersPromises = topCharacterIds.map(id => 
           axios.get(
             `https://gateway.marvel.com/v1/public/characters/${id}`,
@@ -123,7 +126,7 @@ function App() {
 
       } catch (error) {
         console.error("Error fetching characters:", error);
-				
+
       } finally {
         setLoading(false);
       }
@@ -138,40 +141,18 @@ function App() {
 
   return (
     <div className="marvel-app">
+			<HeroImage />
       <h1>Top 100 Personagens da Marvel</h1>
       
       {loading ? (
         <p>Carregando personagens principais...</p>
       ) : (
         <div className="characters-container">
-          <div className="characters-list">
-            <h2>Lista de Personagens</h2>
-            <ul>
-              {characters.map((character) => (
-                <li key={character.id}>
-                  <a href="#" onClick={() => handleCharacterClick(character)}>
-                    {character.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {selectedCharacter && (
-            <div className="character-details">
-              <h2>{selectedCharacter.name}</h2>
-              <img
-                src={`${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`}
-                alt={selectedCharacter.name}
-              />
-              {selectedCharacter.description && (
-                <p>{selectedCharacter.description}</p>
-              )}
-              <p>
-                <strong>Aparições em quadrinhos:</strong> {selectedCharacter.comics.available}
-              </p>
-            </div>
-          )}
+          <CharacterList 
+            characters={characters} 
+            onCharacterClick={handleCharacterClick} 
+          />
+          <CharacterDetail character={selectedCharacter} />
         </div>
       )}
     </div>
