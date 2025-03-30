@@ -143,7 +143,7 @@ function App() {
   return (
     <div className="marvel-app">
       <HeroImage />
-      <h1>Top 100 Personagens da Marvel</h1>
+      <h1 className="title">Top 100 Personagens da Marvel</h1>
       
       {loading ? (
         <p>Carregando personagens principais...</p>
